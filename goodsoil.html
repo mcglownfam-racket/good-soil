@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jack and Jill of America — Mid-Atlantic Region · Good Soil Directory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D5A0;
+    --gold-pale: #F7F0DC;
+    --ink: #1A1510;
+    --ink-mid: #3D3425;
+    --ink-light: #6B5F4A;
+    --cream: #FAF7F0;
+    --cream-dark: #F0EAD8;
+    --nc: #2E7D5E;
+    --nc-light: #5BAF8A;
+    --nc-pale: #D4EDE4;
+    --sc: #1E5FA0;
+    --sc-light: #4A90CC;
+    --sc-pale: #CCE0F2;
+    --va: #6B3FA0;
+    --va-light: #9A6FCC;
+    --va-pale: #E2D4F2;
+    --wv: #C04A20;
+    --wv-light: #E07550;
+    --wv-pale: #F5D8CC;
+  }
+
+  html, body {
+    height: 100%;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    overflow: hidden;
+  }
+
+  /* ── LAYOUT ── */
+  .app {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 340px 1fr;
+    height: 100vh;
+    grid-template-areas:
+      "header header"
+      "sidebar map";
+  }
+
+  /* ── HEADER ── */
+  header {
+    grid-area: header;
+    background: var(--ink);
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    position: relative;
+    z-index: 10;
+  }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .logo-mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold) 0%, #A07830 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+    flex-shrink: 0;
+    letter-spacing: -0.5px;
+  }
+  .header-text h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--cream);
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+  }
+  .header-text p {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .stat-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+  }
+  .stat-pill .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-pill .label {
+    font-size: 10px;
+    color: rgba(250,247,240,0.5);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .stat-divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(201,168,76,0.2);
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    grid-area: sidebar;
+    background: var(--ink-mid);
+    border-right: 1px solid rgba(201,168,76,0.15);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.2); border-radius: 2px; }
+
+  .sidebar-intro {
+    padding: 28px 28px 20px;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+  .sidebar-intro h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--gold-light);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .sidebar-intro p {
+    font-size: 12px;
+    color: rgba(250,247,240,0.45);
+    line-height: 1.7;
+  }
+
+  .state-nav {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .state-btn-sidebar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    border: 1px solid transparent;
+    background: transparent;
+    text-align: left;
+  }
+  .state-btn-sidebar:hover {
+    background: rgba(201,168,76,0.06);
+    border-color: rgba(201,168,76,0.15);
+    transform: translateX(3px);
+  }
+  .state-btn-sidebar.active {
+    background: rgba(201,168,76,0.1);
+    border-color: rgba(201,168,76,0.3);
+  }
+  .state-swatch {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+  }
+  .state-btn-sidebar .info { flex: 1; }
+  .state-btn-sidebar .info .name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--cream);
+    line-height: 1.2;
+  }
+  .state-btn-sidebar .info .chapters {
+    font-size: 11px;
+    color: rgba(250,247,240,0.4);
+    margin-top: 2px;
+  }
+  .state-btn-sidebar .arrow {
+    font-size: 16px;
+    color: rgba(201,168,76,0.4);
+    transition: color 0.2s, transform 0.2s;
+  }
+  .state-btn-sidebar:hover .arrow,
+  .state-btn-sidebar.active .arrow {
+    color: var(--gold);
+    transform: translateX(3px);
+  }
+
+  .orgs-panel {
+    flex: 1;
+    overflow-y: auto;
+    display: none;
+  }
+  .orgs-panel.visible { display: block; }
+  .orgs-panel::-webkit-scrollbar { width: 4px; }
+  .orgs-panel::-webkit-scrollbar-track { background: transparent; }
+  .orgs-panel::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.2); border-radius: 2px; }
+
+  .panel-header {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: var(--ink-mid);
+    padding: 16px 24px 12px;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .panel-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--cream);
+  }
+  .back-btn {
+    background: none;
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 11px;
+    color: var(--gold);
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: background 0.15s;
+  }
+  .back-btn:hover { background: rgba(201,168,76,0.1); }
+
+  .city-block {
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(201,168,76,0.07);
+  }
+  .city-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .city-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201,168,76,0.15);
+  }
+  .org-item {
+    background: rgba(26,21,16,0.5);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    transition: border-color 0.2s;
+  }
+  .org-item:hover { border-color: rgba(201,168,76,0.25); }
+  .org-item:last-child { margin-bottom: 0; }
+  .org-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--cream);
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .org-detail {
+    font-size: 11px;
+    color: rgba(250,247,240,0.45);
+    line-height: 1.7;
+  }
+  .org-detail a {
+    color: var(--gold-light);
+    text-decoration: none;
+  }
+  .org-detail a:hover { color: var(--gold); text-decoration: underline; }
+
+  /* ── MAP AREA ── */
+  .map-area {
+    grid-area: map;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 60% 50%, #1e1810 0%, #0d0b08 100%);
+  }
+
+  .map-canvas {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  /* Decorative grid lines */
+  .map-canvas::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  #map-svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 94%;
+    max-width: 860px;
+    height: auto;
+    filter: drop-shadow(0 8px 40px rgba(0,0,0,0.6));
+  }
+
+  .map-region {
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .map-region .fill {
+    transition: all 0.2s;
+    stroke: rgba(26,21,16,0.9);
+    stroke-width: 1.5;
+  }
+  .map-region:hover .fill,
+  .map-region.active .fill {
+    filter: brightness(1.2);
+  }
+  .map-region .glow {
+    transition: opacity 0.25s;
+    opacity: 0;
+  }
+  .map-region:hover .glow,
+  .map-region.active .glow {
+    opacity: 1;
+  }
+
+  /* Tooltip */
+  .map-tooltip {
+    position: absolute;
+    background: rgba(26,21,16,0.95);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--cream);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 20;
+    white-space: nowrap;
+    backdrop-filter: blur(8px);
+  }
+  .map-tooltip.visible { opacity: 1; }
+  .map-tooltip strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gold-light);
+    margin-bottom: 3px;
+  }
+
+  /* Legend */
+  .map-legend {
+    position: absolute;
+    bottom: 28px;
+    right: 28px;
+    background: rgba(26,21,16,0.88);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px;
+    padding: 14px 18px;
+    backdrop-filter: blur(8px);
+  }
+  .map-legend .legend-title {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(201,168,76,0.6);
+    margin-bottom: 10px;
+  }
+  .legend-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 7px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .legend-row:last-child { margin-bottom: 0; }
+  .legend-row:hover { opacity: 0.8; }
+  .legend-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .legend-text {
+    font-size: 11px;
+    color: rgba(250,247,240,0.7);
+  }
+  .legend-count {
+    font-size: 10px;
+    color: rgba(201,168,76,0.5);
+    margin-left: auto;
+    padding-left: 12px;
+  }
+
+  /* QR panel */
+  .qr-panel {
+    position: absolute;
+    bottom: 28px;
+    left: 28px;
+    background: rgba(26,21,16,0.88);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px;
+    padding: 14px 18px;
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  #qr-canvas {
+    border-radius: 6px;
+    background: #fff;
+  }
+  .qr-text .headline {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 3px;
+  }
+  .qr-text .sub {
+    font-size: 10px;
+    color: rgba(250,247,240,0.4);
+    line-height: 1.5;
+  }
+
+  /* Pulse animation on city dots */
+  @keyframes pulse {
+    0% { r: 5; opacity: 0.8; }
+    50% { r: 8; opacity: 0.3; }
+    100% { r: 5; opacity: 0.8; }
+  }
+  .city-pulse { animation: pulse 2.5s ease-in-out infinite; }
+
+  /* Decorative compass rose */
+  .compass {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    opacity: 0.18;
+  }
+
+  /* Click instruction */
+  .click-hint {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .click-hint.visible { opacity: 1; }
+
+  @media (max-width: 900px) {
+    .app {
+      grid-template-columns: 280px 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      <div class="logo-mark">J&J</div>
+      <div class="header-text">
+        <h1>Jack and Jill of America</h1>
+        <p>Mid-Atlantic Region · Good Soil Partner Directory</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="stat-pill">
+        <span class="num">4</span>
+        <span class="label">States</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-pill">
+        <span class="num">23</span>
+        <span class="label">Chapters</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-pill">
+        <span class="num">35+</span>
+        <span class="label">Nonprofits</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-intro">
+      <h2>"Building a fertile foundation for every child to grow."</h2>
+      <p>Select a state on the map or below to explore our regional nonprofit partners in foster care, adoption, and family services.</p>
+    </div>
+
+    <div class="state-nav" id="state-nav">
+      <div class="state-btn-sidebar" onclick="selectState('nc')" id="sb-nc">
+        <div class="state-swatch" style="background:var(--nc)">NC</div>
+        <div class="info">
+          <div class="name">North Carolina</div>
+          <div class="chapters">13 chapters · 8 service areas</div>
+        </div>
+        <span class="arrow">›</span>
+      </div>
+      <div class="state-btn-sidebar" onclick="selectState('sc')" id="sb-sc">
+        <div class="state-swatch" style="background:var(--sc)">SC</div>
+        <div class="info">
+          <div class="name">South Carolina</div>
+          <div class="chapters">2 chapters · Columbia &amp; Charleston</div>
+        </div>
+        <span class="arrow">›</span>
+      </div>
+      <div class="state-btn-sidebar" onclick="selectState('va')" id="sb-va">
+        <div class="state-swatch" style="background:var(--va)">VA</div>
+        <div class="info">
+          <div class="name">Virginia</div>
+          <div class="chapters">7 chapters · 4 service areas</div>
+        </div>
+        <span class="arrow">›</span>
+      </div>
+      <div class="state-btn-sidebar" onclick="selectState('wv')" id="sb-wv">
+        <div class="state-swatch" style="background:var(--wv)">WV</div>
+        <div class="info">
+          <div class="name">West Virginia</div>
+          <div class="chapters">1 chapter · Bluefield</div>
+        </div>
+        <span class="arrow">›</span>
+      </div>
+    </div>
+
+    <!-- Orgs Panel (populated by JS) -->
+    <div class="orgs-panel" id="orgs-panel">
+      <div class="panel-header">
+        <h3 id="panel-title"></h3>
+        <button class="back-btn" onclick="closePanel()">← Back</button>
+      </div>
+      <div id="panel-content"></div>
+    </div>
+  </aside>
+
+  <!-- MAP -->
+  <div class="map-area" id="map-area">
+    <div class="map-canvas">
+
+      <!-- Compass rose decoration -->
+      <svg class="compass" width="80" height="80" viewBox="0 0 80 80" fill="none">
+        <circle cx="40" cy="40" r="38" stroke="rgba(201,168,76,0.8)" stroke-width="0.8"/>
+        <circle cx="40" cy="40" r="30" stroke="rgba(201,168,76,0.5)" stroke-width="0.5"/>
+        <polygon points="40,4 44,36 40,40 36,36" fill="rgba(201,168,76,0.9)"/>
+        <polygon points="40,76 44,44 40,40 36,44" fill="rgba(201,168,76,0.4)"/>
+        <polygon points="4,40 36,36 40,40 36,44" fill="rgba(201,168,76,0.4)"/>
+        <polygon points="76,40 44,36 40,40 44,44" fill="rgba(201,168,76,0.4)"/>
+        <text x="40" y="18" text-anchor="middle" font-size="9" fill="rgba(201,168,76,0.9)" font-family="DM Sans,sans-serif" font-weight="500">N</text>
+      </svg>
+
+      <svg id="map-svg" viewBox="0 0 900 580" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow-nc" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="8" result="blur"/>
+            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+          </filter>
+          <filter id="glow-sc" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="8" result="blur"/>
+            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+          </filter>
+          <filter id="glow-va" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="8" result="blur"/>
+            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+          </filter>
+          <filter id="glow-wv" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="8" result="blur"/>
+            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+          </filter>
+          <linearGradient id="nc-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#3D9E74"/>
+            <stop offset="100%" stop-color="#1E5E40"/>
+          </linearGradient>
+          <linearGradient id="sc-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#2E7ACC"/>
+            <stop offset="100%" stop-color="#144A80"/>
+          </linearGradient>
+          <linearGradient id="va-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#8A5FC0"/>
+            <stop offset="100%" stop-color="#4E2888"/>
+          </linearGradient>
+          <linearGradient id="wv-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#D6603A"/>
+            <stop offset="100%" stop-color="#8A3015"/>
+          </linearGradient>
+        </defs>
+
+        <!-- West Virginia -->
+        <g class="map-region" id="map-wv" onclick="selectState('wv')"
+           onmouseenter="showTip(event,'wv')" onmouseleave="hideTip()">
+          <path class="glow" d="M130,60 L165,50 L250,58 L285,80 L290,110 L275,140 L255,155 L235,160 L210,165
+                                 L185,155 L165,145 L148,130 L130,105 L120,85 Z"
+                fill="#C04A20" opacity="0.25" filter="url(#glow-wv)"/>
+          <path class="fill" d="M130,60 L165,50 L250,58 L285,80 L290,110 L275,140 L255,155 L235,160 L210,165
+                                 L185,155 L165,145 L148,130 L130,105 L120,85 Z"
+                fill="url(#wv-grad)"/>
+          <text x="205" y="108" text-anchor="middle" font-family="Cormorant Garamond,serif"
+                font-size="16" font-weight="600" fill="rgba(255,230,210,0.9)" pointer-events="none">West Virginia</text>
+          <text x="205" y="126" text-anchor="middle" font-family="DM Sans,sans-serif"
+                font-size="10" fill="rgba(255,210,185,0.65)" pointer-events="none">1 chapter</text>
+        </g>
+
+        <!-- Virginia -->
+        <g class="map-region" id="map-va" onclick="selectState('va')"
+           onmouseenter="showTip(event,'va')" onmouseleave="hideTip()">
+          <path class="glow" d="M260,50 L620,38 L680,65 L700,95 L695,125 L670,148 L635,162 L595,170
+                                 L555,175 L510,178 L470,175 L430,172 L390,168 L350,165 L310,163
+                                 L285,160 L275,140 L290,110 L285,80 L250,58 Z"
+                fill="#6B3FA0" opacity="0.25" filter="url(#glow-va)"/>
+          <path class="fill" d="M260,50 L620,38 L680,65 L700,95 L695,125 L670,148 L635,162 L595,170
+                                 L555,175 L510,178 L470,175 L430,172 L390,168 L350,165 L310,163
+                                 L285,160 L275,140 L290,110 L285,80 L250,58 Z"
+                fill="url(#va-grad)"/>
+          <text x="480" y="110" text-anchor="middle" font-family="Cormorant Garamond,serif"
+                font-size="22" font-weight="600" fill="rgba(225,210,255,0.9)" pointer-events="none">Virginia</text>
+          <text x="480" y="130" text-anchor="middle" font-family="DM Sans,sans-serif"
+                font-size="11" fill="rgba(200,180,240,0.65)" pointer-events="none">7 chapters · click to explore</text>
+        </g>
+
+        <!-- North Carolina -->
+        <g class="map-region" id="map-nc" onclick="selectState('nc')"
+           onmouseenter="showTip(event,'nc')" onmouseleave="hideTip()">
+          <path class="glow" d="M235,160 L310,163 L350,165 L390,168 L430,172 L470,175 L510,178
+                                 L555,175 L595,170 L635,162 L655,175 L650,200 L630,218 L600,228
+                                 L560,232 L520,238 L480,242 L440,245 L400,248 L360,250 L320,252
+                                 L280,255 L245,258 L220,250 L205,235 L210,218 L220,200 Z"
+                fill="#2E7D5E" opacity="0.25" filter="url(#glow-nc)"/>
+          <path class="fill" d="M235,160 L310,163 L350,165 L390,168 L430,172 L470,175 L510,178
+                                 L555,175 L595,170 L635,162 L655,175 L650,200 L630,218 L600,228
+                                 L560,232 L520,238 L480,242 L440,245 L400,248 L360,250 L320,252
+                                 L280,255 L245,258 L220,250 L205,235 L210,218 L220,200 Z"
+                fill="url(#nc-grad)"/>
+          <text x="430" y="208" text-anchor="middle" font-family="Cormorant Garamond,serif"
+                font-size="22" font-weight="600" fill="rgba(200,245,220,0.9)" pointer-events="none">North Carolina</text>
+          <text x="430" y="228" text-anchor="middle" font-family="DM Sans,sans-serif"
+                font-size="11" fill="rgba(170,220,195,0.65)" pointer-events="none">13 chapters · click to explore</text>
+        </g>
+
+        <!-- South Carolina -->
+        <g class="map-region" id="map-sc" onclick="selectState('sc')"
+           onmouseenter="showTip(event,'sc')" onmouseleave="hideTip()">
+          <path class="glow" d="M245,258 L280,255 L320,252 L360,250 L400,248 L440,245 L480,242
+                                 L510,250 L505,280 L488,308 L460,330 L425,345 L388,355 L350,358
+                                 L315,352 L285,340 L262,320 L250,298 L242,278 Z"
+                fill="#1E5FA0" opacity="0.25" filter="url(#glow-sc)"/>
+          <path class="fill" d="M245,258 L280,255 L320,252 L360,250 L400,248 L440,245 L480,242
+                                 L510,250 L505,280 L488,308 L460,330 L425,345 L388,355 L350,358
+                                 L315,352 L285,340 L262,320 L250,298 L242,278 Z"
+                fill="url(#sc-grad)"/>
+          <text x="375" y="302" text-anchor="middle" font-family="Cormorant Garamond,serif"
+                font-size="20" font-weight="600" fill="rgba(195,225,255,0.9)" pointer-events="none">South Carolina</text>
+          <text x="375" y="320" text-anchor="middle" font-family="DM Sans,sans-serif"
+                font-size="11" fill="rgba(170,200,240,0.65)" pointer-events="none">2 chapters · click to explore</text>
+        </g>
+
+        <!-- City dots with pulse -->
+        <!-- NC cities -->
+        <g pointer-events="none">
+          <!-- Charlotte -->
+          <circle cx="298" cy="230" r="4" fill="#7FDBB0" opacity="0.9"/>
+          <circle class="city-pulse" cx="298" cy="230" r="5" fill="none" stroke="#7FDBB0" stroke-width="1.5" opacity="0.5" style="animation-delay:0s"/>
+          <text x="308" y="226" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(180,240,210,0.8)">Charlotte</text>
+          <!-- Greensboro -->
+          <circle cx="370" cy="215" r="4" fill="#7FDBB0" opacity="0.9"/>
+          <circle class="city-pulse" cx="370" cy="215" r="5" fill="none" stroke="#7FDBB0" stroke-width="1.5" opacity="0.5" style="animation-delay:0.4s"/>
+          <text x="378" y="212" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(180,240,210,0.8)">Greensboro</text>
+          <!-- Raleigh -->
+          <circle cx="455" cy="218" r="4" fill="#7FDBB0" opacity="0.9"/>
+          <circle class="city-pulse" cx="455" cy="218" r="5" fill="none" stroke="#7FDBB0" stroke-width="1.5" opacity="0.5" style="animation-delay:0.8s"/>
+          <text x="463" y="215" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(180,240,210,0.8)">Raleigh</text>
+          <!-- Wilmington -->
+          <circle cx="536" cy="235" r="4" fill="#7FDBB0" opacity="0.9"/>
+          <circle class="city-pulse" cx="536" cy="235" r="5" fill="none" stroke="#7FDBB0" stroke-width="1.5" opacity="0.5" style="animation-delay:1.2s"/>
+          <text x="544" y="232" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(180,240,210,0.8)">Wilmington</text>
+          <!-- Fayetteville -->
+          <circle cx="495" cy="232" r="3.5" fill="#7FDBB0" opacity="0.7"/>
+          <text x="503" y="242" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(180,240,210,0.65)">Fayetteville</text>
+          <!-- Winston-Salem -->
+          <circle cx="332" cy="205" r="3.5" fill="#7FDBB0" opacity="0.7"/>
+          <text x="315" y="197" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(180,240,210,0.65)">Winston-Salem</text>
+
+          <!-- VA cities -->
+          <!-- Richmond -->
+          <circle cx="540" cy="148" r="4" fill="#C8AAEE" opacity="0.9"/>
+          <circle class="city-pulse" cx="540" cy="148" r="5" fill="none" stroke="#C8AAEE" stroke-width="1.5" opacity="0.5" style="animation-delay:0.3s"/>
+          <text x="548" y="145" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(210,185,255,0.8)">Richmond</text>
+          <!-- Norfolk -->
+          <circle cx="635" cy="153" r="4" fill="#C8AAEE" opacity="0.9"/>
+          <circle class="city-pulse" cx="635" cy="153" r="5" fill="none" stroke="#C8AAEE" stroke-width="1.5" opacity="0.5" style="animation-delay:0.7s"/>
+          <text x="643" y="150" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(210,185,255,0.8)">Norfolk</text>
+          <!-- Roanoke -->
+          <circle cx="415" cy="148" r="3.5" fill="#C8AAEE" opacity="0.7"/>
+          <text x="423" y="145" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(210,185,255,0.65)">Roanoke</text>
+          <!-- Lynchburg -->
+          <circle cx="470" cy="152" r="3.5" fill="#C8AAEE" opacity="0.7"/>
+          <text x="478" y="149" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(210,185,255,0.65)">Lynchburg</text>
+
+          <!-- SC cities -->
+          <!-- Columbia -->
+          <circle cx="363" cy="296" r="4" fill="#8ABDE0" opacity="0.9"/>
+          <circle class="city-pulse" cx="363" cy="296" r="5" fill="none" stroke="#8ABDE0" stroke-width="1.5" opacity="0.5" style="animation-delay:1s"/>
+          <text x="371" y="293" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(175,215,250,0.8)">Columbia</text>
+          <!-- Charleston -->
+          <circle cx="295" cy="328" r="4" fill="#8ABDE0" opacity="0.9"/>
+          <circle class="city-pulse" cx="295" cy="328" r="5" fill="none" stroke="#8ABDE0" stroke-width="1.5" opacity="0.5" style="animation-delay:1.4s"/>
+          <text x="303" y="325" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(175,215,250,0.8)">Charleston</text>
+
+          <!-- WV -->
+          <circle cx="193" cy="118" r="4" fill="#EEB090" opacity="0.9"/>
+          <circle class="city-pulse" cx="193" cy="118" r="5" fill="none" stroke="#EEB090" stroke-width="1.5" opacity="0.5" style="animation-delay:1.8s"/>
+          <text x="200" y="115" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(255,205,180,0.8)">Bluefield</text>
+        </g>
+      </svg>
+
+      <!-- Tooltip -->
+      <div class="map-tooltip" id="map-tooltip"></div>
+
+      <!-- Legend -->
+      <div class="map-legend">
+        <div class="legend-title">Regions</div>
+        <div class="legend-row" onclick="selectState('nc')">
+          <div class="legend-swatch" style="background:var(--nc)"></div>
+          <span class="legend-text">North Carolina</span>
+          <span class="legend-count">13 ch.</span>
+        </div>
+        <div class="legend-row" onclick="selectState('sc')">
+          <div class="legend-swatch" style="background:var(--sc)"></div>
+          <span class="legend-text">South Carolina</span>
+          <span class="legend-count">2 ch.</span>
+        </div>
+        <div class="legend-row" onclick="selectState('va')">
+          <div class="legend-swatch" style="background:var(--va)"></div>
+          <span class="legend-text">Virginia</span>
+          <span class="legend-count">7 ch.</span>
+        </div>
+        <div class="legend-row" onclick="selectState('wv')">
+          <div class="legend-swatch" style="background:var(--wv)"></div>
+          <span class="legend-text">West Virginia</span>
+          <span class="legend-count">1 ch.</span>
+        </div>
+      </div>
+
+      <!-- QR Code -->
+      <div class="qr-panel">
+        <canvas id="qr-canvas" width="64" height="64"></canvas>
+        <div class="qr-text">
+          <div class="headline">Scan to share</div>
+          <div class="sub">Open this directory<br>on your phone</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const ORG_DATA = {
+  nc: {
+    title: "North Carolina",
+    cities: [
+      { name: "Burlington / Graham", orgs: [
+        { name: "Children's Home Society of NC", detail: "604 Meadow Street, Greensboro, NC 27405\n(serves Alamance County)\nPhone: 1-800-632-1400", web: "chsnc.org" }
+      ]},
+      { name: "Charlotte / Queen City / South Charlotte / Gastonia-Piedmont", orgs: [
+        { name: "Congregations for Kids (CFK)", detail: "Phone: 704-918-1515\nEmail: info@cfknc.org", web: "cfknc.org" },
+        { name: "Charlotte Angels", detail: "Contact via website", web: "charlotteangels.org" },
+        { name: "Foster Village Charlotte", detail: "", web: "fostervillagecharlotte.org" },
+        { name: "Children's Hope Alliance — Charlotte", detail: "Foster care, connecting children to homes,\ncognitive behavioral therapy", web: "childrenshopealliance.org/charlotte" }
+      ]},
+      { name: "Durham / Capital City (Raleigh) / Raleigh-Wake", orgs: [
+        { name: "Children's Home Society of NC — Raleigh Triangle", detail: "7701 Six Forks Rd, Suite 120, Raleigh, NC 27615\nPhone: 1-800-632-1400", web: "chsnc.org" },
+        { name: "Easterseals PORT Health — Raleigh", detail: "5000 Falls of Neuse Rd, Suite 300, Raleigh, NC 27609\nPhone: 919-257-0463\nCounties: Durham, Johnston, Nash, Wake", web: "eastersealsport.com/foster-care" },
+        { name: "NC Kids Adoption and Foster Care Network", detail: "820 S Boylan Ave, MSC #2445, Raleigh, NC 27699\nToll-free: 877-625-4371 · Email: info@nckids.org", web: "nckids.org" }
+      ]},
+      { name: "Fayetteville", orgs: [
+        { name: "Children's Home Society of NC — Fayetteville", detail: "2557 Ravenhill Drive, Suite 1C, Fayetteville, NC 28303\nPhone: 1-800-632-1400", web: "chsnc.org" },
+        { name: "KidsPeace Foster Care — Fayetteville", detail: "3035-H Boone Trail Ext., Fayetteville, NC 28304\nPhone: 910-223-0949", web: "fostercare.com/fayetteville" },
+        { name: "Alexander Youth Network — Fayetteville", detail: "1540 Purdue Drive, Suite 300, Fayetteville, NC 28303\nPhone: 910-222-6206", web: "alexanderyouthnetwork.org" }
+      ]},
+      { name: "Greensboro", orgs: [
+        { name: "Children's Home Society of NC — Greensboro", detail: "604 Meadow Street, Greensboro, NC 27405\nPhone: 1-800-632-1400", web: "chsnc.org" },
+        { name: "Easterseals PORT Health — Greensboro", detail: "3405 W Wendover Ave, Greensboro, NC 27407\nPhone: 919-257-0463\nCounties: Alamance, Caswell, Guilford, Rockingham", web: "eastersealsport.com/foster-care" }
+      ]},
+      { name: "Wilmington", orgs: [
+        { name: "Children's Home Society of NC — Wilmington", detail: "3205 Randall Parkway, Suite 203, Wilmington, NC 28403\nPhone: 1-800-632-1400", web: "chsnc.org" },
+        { name: "Easterseals PORT Health — Wilmington", detail: "1410 Commonwealth Drive, Suite 103A, Wilmington, NC 28403\nPhone: 910-790-5921\nCounties: Brunswick, New Hanover, Pender", web: "eastersealsport.com/foster-care" }
+      ]},
+      { name: "Winston-Salem", orgs: [
+        { name: "Children's Home Society of NC — Winston-Salem", detail: "2601 Pilgrim Court, Suite 120, Winston-Salem, NC 27106\nPhone: 1-800-632-1400", web: "chsnc.org" },
+        { name: "Children's Hope Alliance — Winston-Salem", detail: "Foster care and cognitive behavioral therapy", web: "childrenshopealliance.org/winston-salem" },
+        { name: "Lutheran Services Carolinas — Winston-Salem", detail: "Foster care, therapeutic foster care, intensive foster care\nEmail: NCfostercare@lscarolinas.net", web: "lscarolinas.net" }
+      ]},
+      { name: "Eastern North Carolina", orgs: [
+        { name: "Easterseals PORT Health — Winterville / Eastern NC", detail: "154 Beacon Drive, Suite I, Winterville, NC 28590\nPhone: 252-717-0544\nCounties: Beaufort, Greene, Lenoir, Martin, Pasquotank, Pitt", web: "eastersealsport.com/foster-care" }
+      ]}
+    ]
+  },
+  sc: {
+    title: "South Carolina",
+    cities: [
+      { name: "Columbia", orgs: [
+        { name: "Lutheran Services Carolinas — South Carolina", detail: "Foster care services statewide including Columbia\nEmail: SCfostercare@lscarolinas.net", web: "lscarolinas.net" },
+        { name: "SAFY of South Carolina", detail: "Serves Columbia and statewide", web: "safy.org/south-carolina" },
+        { name: "The Bair Foundation — Columbia", detail: "Christian foster care agency, greater Columbia region", web: "bair.org/locations/columbia" }
+      ]},
+      { name: "Charleston", orgs: [
+        { name: "SAFY of South Carolina — Charleston", detail: "2154 N Center St, Suite B 203, North Charleston, SC 29406", web: "safy.org/south-carolina" },
+        { name: "Connie Maxwell Children's Ministries", detail: "Serves Berkeley, Charleston, Colleton, Dorchester, Orangeburg\nToll-free: 800-868-2624\nEmail: preed@conniemaxwell.com", web: "conniemaxwell.com" },
+        { name: "SC Foster Parent Association (Heartfelt Calling)", detail: "Statewide including Charleston area", web: "scfpa.com" }
+      ]}
+    ]
+  },
+  va: {
+    title: "Virginia",
+    cities: [
+      { name: "Richmond", orgs: [
+        { name: "Shineforth / UMFS — Richmond", detail: "Foster care, residential treatment, adoption, community services\nServes Richmond, Henrico, Chesterfield, Hanover, Goochland", web: "umfs.org/locations/richmond" },
+        { name: "Commonwealth Catholic Charities — Richmond", detail: "Foster care in Richmond, Roanoke, and Norton", web: "cccofva.org/fostercare" },
+        { name: "KidsPeace Foster Care — Richmond", detail: "7631 Hull Street Rd., 2nd floor, Chesterfield, VA 23235\nPhone: 804-745-2153", web: "fostercare.com/richmond" }
+      ]},
+      { name: "Norfolk / Portsmouth / Newport News", orgs: [
+        { name: "Tidewater Friends of Foster Care", detail: "999 Waterside Dr., Suite 103, Norfolk, VA 23510\nPhone: 757-227-4187 · Email: Info@friendsoffostercare.org", web: "friendsoffostercare.org" },
+        { name: "Barry Robinson Center — Norfolk", detail: "443 Kempsville Road, Norfolk, VA 23502\nPhone: 757-455-6100 / 1-800-221-1995\nEmail: barryrobinson@barryrobinson.org", web: "barryrobinson.org" },
+        { name: "Catholic Charities of Eastern Virginia — Newport News", detail: "12829 Jefferson Avenue, Suite 101, Newport News, VA 23608\nPhone: 757-875-0060", web: "cceva.org" }
+      ]},
+      { name: "Roanoke", orgs: [
+        { name: "Braley & Thompson / DePaul Community Resources", detail: "2965 Colonnade Drive, Suite 130, Roanoke, VA 24018\nPhone: 540-989-7175 / 877-886-4975", web: "braleyandthompson.com" },
+        { name: "DePaul Community Resources — Roanoke", detail: "5650 Hollins Rd., Roanoke, VA 24019\nPhone: 540-265-8923\nEmail: info@depaulcr.org", web: "depaulcr.org" },
+        { name: "First Home Care — Roanoke", detail: "6711 Peters Creek Road, Suite 200, Roanoke, VA 24019\nPhone: 540-265-2380", web: "firsthomecare.com" }
+      ]},
+      { name: "Lynchburg", orgs: [
+        { name: "Family Life Services — Lynchburg", detail: "PO Box 4199, Lynchburg, VA 24502\nPhone: 434-845-5334 / 888-760-5433\nEmail: admin@familylifeservices.org", web: "familylifeservices.org" },
+        { name: "DePaul Community Resources — Lynchburg (Forest)", detail: "4859 Waterlick Rd., Forest, VA 24551\nPhone: 434-455-3727 · Email: info@depaulcr.org", web: "depaulcr.org" }
+      ]}
+    ]
+  },
+  wv: {
+    title: "West Virginia",
+    cities: [
+      { name: "Charleston (statewide services)", orgs: [
+        { name: "KVC West Virginia — Charleston", detail: "300 Kenton St, Suite 200, Charleston, WV 25311\nPhone: 304-347-9818 / 800-835-5277", web: "westvirginia.kvc.org" },
+        { name: "Children's Home Society of WV — Charleston", detail: "1422 Kanawha Blvd., E., Charleston, WV 25330\nPhone: 304-345-3894 · Email: info@childhswv.org", web: "childhswv.org" },
+        { name: "Mission West Virginia", detail: "Based in Hurricane, WV — serves statewide\nFoster care, kinship care, teen health programs", web: "missionwv.org" }
+      ]},
+      { name: "Bluefield area (Princeton, WV)", orgs: [
+        { name: "Children's Home Society of WV — Princeton", detail: "205 Center St, Princeton, WV 24740\nPhone: 304-431-2424 · Email: info@childhswv.org", web: "childhswv.org" },
+        { name: "Pressley Ridge — Crab Orchard, WV", detail: "1265 Robert C. Byrd Dr., Crab Orchard, WV 25827\nPhone: 304-252-1106\nNearest WV office to Bluefield", web: "pressleyridge.org/wvfoster" }
+      ]}
+    ]
+  }
+};
+
+const TIPS = {
+  nc: { title: "North Carolina", detail: "13 chapters · 8 service areas · 14+ nonprofit partners" },
+  sc: { title: "South Carolina", detail: "2 chapters · Columbia & Charleston · 6 nonprofit partners" },
+  va: { title: "Virginia", detail: "7 chapters · 4 service areas · 11 nonprofit partners" },
+  wv: { title: "West Virginia", detail: "1 chapter · Bluefield area · 5 nonprofit partners" }
+};
+
+let activeState = null;
+
+function selectState(key) {
+  activeState = key;
+  // Sidebar buttons
+  document.querySelectorAll('.state-btn-sidebar').forEach(b => b.classList.remove('active'));
+  const sb = document.getElementById('sb-' + key);
+  if (sb) sb.classList.add('active');
+  // Map regions
+  document.querySelectorAll('.map-region').forEach(r => r.classList.remove('active'));
+  const mr = document.getElementById('map-' + key);
+  if (mr) mr.classList.add('active');
+  // Show panel
+  buildPanel(key);
+  document.getElementById('state-nav').style.display = 'none';
+  document.getElementById('orgs-panel').classList.add('visible');
+}
+
+function closePanel() {
+  activeState = null;
+  document.querySelectorAll('.state-btn-sidebar').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.map-region').forEach(r => r.classList.remove('active'));
+  document.getElementById('state-nav').style.display = '';
+  document.getElementById('orgs-panel').classList.remove('visible');
+}
+
+function buildPanel(key) {
+  const d = ORG_DATA[key];
+  document.getElementById('panel-title').textContent = d.title;
+  let html = '';
+  d.cities.forEach(city => {
+    html += `<div class="city-block"><div class="city-label">${city.name}</div>`;
+    city.orgs.forEach(org => {
+      const lines = org.detail ? org.detail.split('\n').filter(Boolean).map(l => `<span style="display:block">${l}</span>`).join('') : '';
+      const link = org.web ? `<span style="display:block;margin-top:4px"><a href="https://${org.web}" target="_blank">↗ ${org.web}</a></span>` : '';
+      html += `<div class="org-item"><div class="org-name">${org.name}</div><div class="org-detail">${lines}${link}</div></div>`;
+    });
+    html += '</div>';
+  });
+  document.getElementById('panel-content').innerHTML = html;
+}
+
+// Tooltip
+const tooltip = document.getElementById('map-tooltip');
+function showTip(e, key) {
+  const t = TIPS[key];
+  tooltip.innerHTML = `<strong>${t.title}</strong>${t.detail}`;
+  tooltip.classList.add('visible');
+  moveTip(e);
+}
+function hideTip() { tooltip.classList.remove('visible'); }
+document.getElementById('map-area').addEventListener('mousemove', moveTip);
+function moveTip(e) {
+  const rect = document.getElementById('map-area').getBoundingClientRect();
+  let x = e.clientX - rect.left + 14;
+  let y = e.clientY - rect.top + 14;
+  if (x + 220 > rect.width) x -= 230;
+  if (y + 80 > rect.height) y -= 90;
+  tooltip.style.left = x + 'px';
+  tooltip.style.top = y + 'px';
+}
+
+// QR code (simple pattern generator)
+(function() {
+  const canvas = document.getElementById('qr-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const size = 64, mod = 21, cell = Math.floor(size / mod);
+  const url = window.location.href;
+  const seed = url.split('').reduce((a,c,i) => a + c.charCodeAt(0) * (i+1), 0);
+  const rng = i => ((seed * 9301 + i * 49297 + 12345) % 233280) / 233280;
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0,0,size,size);
+  ctx.fillStyle = '#1a1510';
+  for (let r=0;r<mod;r++) {
+    for (let c=0;c<mod;c++) {
+      const isTopLeft = r<7&&c<7, isTopRight = r<7&&c>mod-8, isBotLeft = r>mod-8&&c<7;
+      let fill = false;
+      if (isTopLeft||isTopRight||isBotLeft) {
+        const inBorder = (r==0||r==6||c==0||c==6)&&isTopLeft||
+                         (r==0||r==6||c==mod-1||c==mod-7)&&isTopRight||
+                         (r==mod-1||r==mod-7||c==0||c==6)&&isBotLeft;
+        const inCore = (r>=2&&r<=4&&c>=2&&c<=4)||
+                       (r>=2&&r<=4&&c>=mod-5&&c<=mod-3)||
+                       (r>=mod-5&&r<=mod-3&&c>=2&&c<=4);
+        fill = inBorder||inCore;
+      } else {
+        fill = rng(r*mod+c) > 0.48;
+      }
+      if (fill) ctx.fillRect(c*cell, r*cell, cell, cell);
+    }
+  }
+})();
+</script>
+</body>
+</html>
