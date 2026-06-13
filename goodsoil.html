@@ -797,7 +797,7 @@
 
       <!-- QR Code -->
       <div class="qr-panel">
-        <div id="qr-container" style="width:64px;height:64px;border-radius:6px;overflow:hidden;background:#fff"></div>
+        <div id="qr-container" style="width:120px;height:120px;border-radius:6px;overflow:hidden;background:#fff"></div>
         <div class="qr-text">
           <div class="headline">Scan to share</div>
           <div class="sub">Open this directory<br>on your phone</div>
@@ -982,8 +982,8 @@ function moveTip(e) {
     if (!container) return;
     new QRCode(container, {
       text: 'https://mcglownfam-racket.github.io/good-soil/goodsoil.html',
-      width: 64,
-      height: 64,
+      width: 120,
+      height: 120,
       colorDark: '#1a1510',
       colorLight: '#ffffff',
       correctLevel: QRCode.CorrectLevel.M
