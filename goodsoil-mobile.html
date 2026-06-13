@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Good Soil · Partner Directory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #00204A;
+  --navy-mid: #003270;
+  --navy-light: #1A5296;
+  --pink: #D22385;
+  --pink-light: #F59BBB;
+  --pink-pale: #FDE8F0;
+  --blue: #005DAA;
+  --blue-light: #5C82C1;
+  --blue-pale: #E0EAFA;
+  --cream: #F5F8FF;
+  --text: #0D1B2A;
+  --text-mid: #3A4A5C;
+  --text-muted: #7A8A9C;
+  --border: #D8E4F0;
+  --white: #FFFFFF;
+  --nc: #1E7A54;
+  --sc: #005DAA;
+  --va: #C01878;
+  --wv: #B84020;
+}
+
+html { background: var(--cream); }
+body { font-family: 'DM Sans', sans-serif; color: var(--text); min-height: 100vh; }
+
+/* TOP HEADER */
+.top-bar {
+  background: var(--navy);
+  padding: 0 20px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.top-bar-left { display: flex; align-items: center; gap: 12px; }
+.logo-circle {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, #F59BBB, #D22385);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px; font-weight: 600; color: white;
+  flex-shrink: 0;
+}
+.top-bar-title {
+  font-size: 13px; font-weight: 500; color: white; line-height: 1.2;
+}
+.top-bar-sub {
+  font-size: 10px; color: var(--pink-light); letter-spacing: 0.06em;
+}
+.desktop-link {
+  font-size: 11px; color: var(--pink-light);
+  text-decoration: none; border: 1px solid rgba(245,155,187,0.3);
+  border-radius: 20px; padding: 5px 12px; white-space: nowrap;
+  transition: background 0.15s;
+}
+.desktop-link:hover { background: rgba(245,155,187,0.1); }
+
+/* HERO BAND */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  padding: 28px 20px 24px;
+  text-align: center;
+  border-bottom: 3px solid var(--pink);
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-weight: 600;
+  color: white; line-height: 1.2; margin-bottom: 6px;
+}
+.hero h1 em { font-style: italic; color: var(--pink-light); }
+.hero p {
+  font-size: 12px; color: rgba(255,255,255,0.55);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.stats-row {
+  display: flex; gap: 0; justify-content: center;
+  border: 1px solid rgba(245,155,187,0.2);
+  border-radius: 12px; overflow: hidden; max-width: 300px; margin: 0 auto;
+}
+.stat {
+  flex: 1; padding: 10px 0; text-align: center;
+  border-right: 1px solid rgba(245,155,187,0.2);
+}
+.stat:last-child { border-right: none; }
+.stat .n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 600; color: var(--pink-light);
+  line-height: 1;
+}
+.stat .l {
+  font-size: 9px; color: rgba(255,255,255,0.4);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* SEARCH */
+.search-wrap {
+  padding: 16px 20px 8px;
+}
+.search-box {
+  width: 100%; padding: 11px 16px 11px 40px;
+  border: 1.5px solid var(--border); border-radius: 10px;
+  font-size: 14px; font-family: 'DM Sans', sans-serif;
+  color: var(--text); background: white;
+  outline: none; transition: border-color 0.2s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237A8A9C' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 14px center;
+}
+.search-box:focus { border-color: var(--blue-light); }
+.search-box::placeholder { color: var(--text-muted); }
+
+/* MAIN CONTENT */
+.content { padding: 8px 20px 40px; }
+
+/* STATE ACCORDION */
+.state-section { margin-bottom: 10px; }
+
+.state-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px;
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  user-select: none;
+  position: relative;
+}
+.state-header:hover { border-color: var(--blue-light); box-shadow: 0 2px 12px rgba(0,93,170,0.08); }
+.state-header.open {
+  border-radius: 12px 12px 0 0;
+  border-bottom-color: transparent;
+  border-color: var(--blue-light);
+}
+
+.state-swatch {
+  width: 40px; height: 40px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 500; color: white;
+  flex-shrink: 0; letter-spacing: 0.03em;
+}
+.state-info { flex: 1; }
+.state-name {
+  font-size: 15px; font-weight: 500; color: var(--text); line-height: 1.2;
+}
+.state-meta {
+  font-size: 11px; color: var(--text-muted); margin-top: 2px;
+}
+.state-chevron {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--cream); display: flex; align-items: center; justify-content: center;
+  transition: transform 0.25s, background 0.2s;
+  flex-shrink: 0;
+}
+.state-header.open .state-chevron { transform: rotate(180deg); background: var(--blue-pale); }
+.chevron-svg { width: 14px; height: 14px; }
+
+/* STATE BODY */
+.state-body {
+  background: white;
+  border: 1.5px solid var(--blue-light);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s ease;
+}
+.state-body.open { max-height: 4000px; }
+
+/* CITY ACCORDION inside state */
+.city-section { border-bottom: 1px solid var(--border); }
+.city-section:last-child { border-bottom: none; }
+
+.city-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 16px;
+  cursor: pointer;
+  background: white;
+  transition: background 0.15s;
+}
+.city-header:hover { background: var(--cream); }
+.city-header.open { background: var(--blue-pale); }
+.city-name {
+  font-size: 13px; font-weight: 500; color: var(--navy-light);
+  display: flex; align-items: center; gap: 8px;
+}
+.city-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+.city-count {
+  font-size: 10px; color: var(--text-muted);
+  background: var(--cream); border-radius: 20px;
+  padding: 2px 8px; border: 1px solid var(--border);
+}
+.city-chevron {
+  width: 18px; height: 18px; transition: transform 0.2s;
+  color: var(--text-muted);
+}
+.city-header.open .city-chevron { transform: rotate(180deg); }
+
+.city-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.3s ease;
+  background: #FAFCFF;
+}
+.city-body.open { max-height: 3000px; }
+
+/* ORG CARDS */
+.org-list { padding: 8px 12px 12px; display: flex; flex-direction: column; gap: 8px; }
+
+.org-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  transition: border-color 0.15s;
+}
+.org-card:hover { border-color: var(--blue-light); }
+.org-card-name {
+  font-size: 13px; font-weight: 500; color: var(--text);
+  line-height: 1.3; margin-bottom: 8px;
+}
+.org-detail-row {
+  display: flex; align-items: flex-start; gap: 8px;
+  margin-bottom: 4px;
+}
+.org-detail-row:last-child { margin-bottom: 0; }
+.org-icon {
+  width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px;
+  color: var(--text-muted);
+}
+.org-detail-text {
+  font-size: 12px; color: var(--text-mid); line-height: 1.5;
+}
+.org-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 12px; color: var(--blue);
+  text-decoration: none; font-weight: 500;
+}
+.org-link:hover { text-decoration: underline; }
+
+/* CALL TO ACTION STRIP */
+.cta-strip {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  margin: 0 0 10px;
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.cta-text { color: white; font-size: 13px; line-height: 1.5; }
+.cta-text strong { color: var(--pink-light); font-weight: 500; }
+.cta-btn {
+  background: var(--pink); color: white;
+  border: none; border-radius: 8px;
+  padding: 9px 16px; font-size: 12px; font-weight: 500;
+  cursor: pointer; white-space: nowrap; text-decoration: none;
+  display: inline-block;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center; padding: 20px;
+  font-size: 11px; color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+.footer a { color: var(--blue); text-decoration: none; }
+
+/* No results */
+.no-results {
+  text-align: center; padding: 40px 20px;
+  color: var(--text-muted); font-size: 14px;
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-left">
+    <div class="logo-circle">J&J</div>
+    <div>
+      <div class="top-bar-title">Jack and Jill of America</div>
+      <div class="top-bar-sub">Mid-Atlantic Region</div>
+    </div>
+  </div>
+  <a class="desktop-link" href="goodsoil.html">View Map ↗</a>
+</div>
+
+<div class="hero">
+  <h1>Good Soil<br><em>Partner Directory</em></h1>
+  <p>NC · SC · VA · WV</p>
+  <div class="stats-row">
+    <div class="stat"><div class="n">4</div><div class="l">States</div></div>
+    <div class="stat"><div class="n">23</div><div class="l">Chapters</div></div>
+    <div class="stat"><div class="n">35+</div><div class="l">Partners</div></div>
+  </div>
+</div>
+
+<div class="search-wrap">
+  <input class="search-box" type="search" placeholder="Search by city, organization, or county…" id="search-input" oninput="filterOrgs(this.value)">
+</div>
+
+<div class="content" id="main-content">
+
+  <div class="cta-strip">
+    <div class="cta-text">Interested in fostering or adoption?<br><strong>These partners are here to help.</strong></div>
+    <a class="cta-btn" href="https://jackandjillinc.org" target="_blank">Learn More</a>
+  </div>
+
+  <!-- NORTH CAROLINA -->
+  <div class="state-section" data-state="nc">
+    <div class="state-header" onclick="toggleState(this)">
+      <div class="state-swatch" style="background:var(--nc)">NC</div>
+      <div class="state-info">
+        <div class="state-name">North Carolina</div>
+        <div class="state-meta">13 chapters · 8 service areas · 14 partners</div>
+      </div>
+      <div class="state-chevron">
+        <svg class="chevron-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+    <div class="state-body">
+
+      <div class="city-section">
+        <div class="city-header" onclick="toggleCity(this)">
+          <div class="city-name"><div class="city-dot" style="background:var(--nc)"></div>Burlington / Graham</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="city-count">1 partner</span>
+            <svg class="city-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="city-body">
+          <div class="org-list">
+            <div class="org-card">
+              <div class="org-card-name">Children's Home Society of NC</div>
+              <div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">604 Meadow Street, Greensboro, NC 27405<br>(serves Alamance County / Burlington-Graham area)</span></div>
+              <div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">1-800-632-1400</span></div>
+              <div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://chsnc.org" target="_blank">chsnc.org</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="city-section">
+        <div class="city-header" onclick="toggleCity(this)">
+          <div class="city-name"><div class="city-dot" style="background:var(--nc)"></div>Charlotte / Queen City / South Charlotte / Gastonia-Piedmont</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="city-count">4 partners</span>
+            <svg class="city-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="city-body">
+          <div class="org-list">
+            <div class="org-card">
+              <div class="org-card-name">Congregations for Kids (CFK)</div>
+              <div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">704-918-1515</span></div>
+              <div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span class="org-detail-text">info@cfknc.org</span></div>
+              <div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://cfknc.org" target="_blank">cfknc.org</a></div>
+            </div>
+            <div class="org-card">
+              <div class="org-card-name">Charlotte Angels</div>
+              <div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://charlotteangels.org" target="_blank">charlotteangels.org</a></div>
+            </div>
+            <div class="org-card">
+              <div class="org-card-name">Foster Village Charlotte</div>
+              <div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://fostervillagecharlotte.org" target="_blank">fostervillagecharlotte.org</a></div>
+            </div>
+            <div class="org-card">
+              <div class="org-card-name">Children's Hope Alliance — Charlotte</div>
+              <div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://childrenshopealliance.org/charlotte" target="_blank">childrenshopealliance.org</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="city-section">
+        <div class="city-header" onclick="toggleCity(this)">
+          <div class="city-name"><div class="city-dot" style="background:var(--nc)"></div>Durham / Capital City (Raleigh) / Raleigh-Wake</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="city-count">3 partners</span>
+            <svg class="city-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="city-body">
+          <div class="org-list">
+            <div class="org-card">
+              <div class="org-card-name">Children's Home Society of NC — Raleigh Triangle</div>
+              <div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">7701 Six Forks Rd, Suite 120, Raleigh, NC 27615</span></div>
+              <div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">1-800-632-1400</span></div>
+              <div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://chsnc.org" target="_blank">chsnc.org</a></div>
+            </div>
+            <div class="org-card">
+              <div class="org-card-name">Easterseals PORT Health — Raleigh</div>
+              <div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">5000 Falls of Neuse Rd, Suite 300, Raleigh, NC 27609</span></div>
+              <div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">919-257-0463 · Counties: Durham, Johnston, Nash, Wake</span></div>
+              <div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://eastersealsport.com/foster-care" target="_blank">eastersealsport.com</a></div>
+            </div>
+            <div class="org-card">
+              <div class="org-card-name">NC Kids Adoption and Foster Care Network</div>
+              <div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">820 S Boylan Ave, MSC #2445, Raleigh, NC 27699</span></div>
+              <div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">877-625-4371 · info@nckids.org</span></div>
+              <div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://nckids.org" target="_blank">nckids.org</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="city-section">
+        <div class="city-header" onclick="toggleCity(this)">
+          <div class="city-name"><div class="city-dot" style="background:var(--nc)"></div>Fayetteville</div>
+          <div style="display:flex;align-items:center;gap:8px"><span class="city-count">3 partners</span><svg class="city-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="city-body"><div class="org-list">
+          <div class="org-card"><div class="org-card-name">Children's Home Society of NC — Fayetteville</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">2557 Ravenhill Drive, Suite 1C, Fayetteville, NC 28303</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">1-800-632-1400</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://chsnc.org" target="_blank">chsnc.org</a></div></div>
+          <div class="org-card"><div class="org-card-name">KidsPeace Foster Care — Fayetteville</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">3035-H Boone Trail Ext., Fayetteville, NC 28304</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">910-223-0949</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://fostercare.com/fayetteville" target="_blank">fostercare.com</a></div></div>
+          <div class="org-card"><div class="org-card-name">Alexander Youth Network — Fayetteville</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">1540 Purdue Drive, Suite 300, Fayetteville, NC 28303</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">910-222-6206</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://alexanderyouthnetwork.org" target="_blank">alexanderyouthnetwork.org</a></div></div>
+        </div></div>
+      </div>
+
+      <div class="city-section">
+        <div class="city-header" onclick="toggleCity(this)">
+          <div class="city-name"><div class="city-dot" style="background:var(--nc)"></div>Greensboro</div>
+          <div style="display:flex;align-items:center;gap:8px"><span class="city-count">2 partners</span><svg class="city-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="city-body"><div class="org-list">
+          <div class="org-card"><div class="org-card-name">Children's Home Society of NC — Greensboro</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">604 Meadow Street, Greensboro, NC 27405</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">1-800-632-1400</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://chsnc.org" target="_blank">chsnc.org</a></div></div>
+          <div class="org-card"><div class="org-card-name">Easterseals PORT Health — Greensboro</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">3405 W Wendover Ave, Greensboro, NC 27407</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">919-257-0463 · Counties: Alamance, Caswell, Guilford, Rockingham</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://eastersealsport.com/foster-care" target="_blank">eastersealsport.com</a></div></div>
+        </div></div>
+      </div>
+
+      <div class="city-section">
+        <div class="city-header" onclick="toggleCity(this)">
+          <div class="city-name"><div class="city-dot" style="background:var(--nc)"></div>Wilmington</div>
+          <div style="display:flex;align-items:center;gap:8px"><span class="city-count">2 partners</span><svg class="city-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="city-body"><div class="org-list">
+          <div class="org-card"><div class="org-card-name">Children's Home Society of NC — Wilmington</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">3205 Randall Parkway, Suite 203, Wilmington, NC 28403</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">1-800-632-1400</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://chsnc.org" target="_blank">chsnc.org</a></div></div>
+          <div class="org-card"><div class="org-card-name">Easterseals PORT Health — Wilmington</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">1410 Commonwealth Drive, Suite 103A, Wilmington, NC 28403</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">910-790-5921 · Counties: Brunswick, New Hanover, Pender</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://eastersealsport.com/foster-care" target="_blank">eastersealsport.com</a></div></div>
+        </div></div>
+      </div>
+
+      <div class="city-section">
+        <div class="city-header" onclick="toggleCity(this)">
+          <div class="city-name"><div class="city-dot" style="background:var(--nc)"></div>Winston-Salem</div>
+          <div style="display:flex;align-items:center;gap:8px"><span class="city-count">3 partners</span><svg class="city-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="city-body"><div class="org-list">
+          <div class="org-card"><div class="org-card-name">Children's Home Society of NC — Winston-Salem</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">2601 Pilgrim Court, Suite 120, Winston-Salem, NC 27106</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">1-800-632-1400</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://chsnc.org" target="_blank">chsnc.org</a></div></div>
+          <div class="org-card"><div class="org-card-name">Children's Hope Alliance — Winston-Salem</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://childrenshopealliance.org/winston-salem" target="_blank">childrenshopealliance.org</a></div></div>
+          <div class="org-card"><div class="org-card-name">Lutheran Services Carolinas — Winston-Salem</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span class="org-detail-text">NCfostercare@lscarolinas.net</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://lscarolinas.net" target="_blank">lscarolinas.net</a></div></div>
+        </div></div>
+      </div>
+
+      <div class="city-section">
+        <div class="city-header" onclick="toggleCity(this)">
+          <div class="city-name"><div class="city-dot" style="background:var(--nc)"></div>Eastern North Carolina</div>
+          <div style="display:flex;align-items:center;gap:8px"><span class="city-count">1 partner</span><svg class="city-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="city-body"><div class="org-list">
+          <div class="org-card"><div class="org-card-name">Easterseals PORT Health — Winterville / Eastern NC</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">154 Beacon Drive, Suite I, Winterville, NC 28590</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">252-717-0544 · Counties: Beaufort, Greene, Lenoir, Martin, Pasquotank, Pitt</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://eastersealsport.com/foster-care" target="_blank">eastersealsport.com</a></div></div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SOUTH CAROLINA -->
+  <div class="state-section" data-state="sc">
+    <div class="state-header" onclick="toggleState(this)">
+      <div class="state-swatch" style="background:var(--sc)">SC</div>
+      <div class="state-info">
+        <div class="state-name">South Carolina</div>
+        <div class="state-meta">2 chapters · Columbia &amp; Charleston · 6 partners</div>
+      </div>
+      <div class="state-chevron"><svg class="chevron-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+    </div>
+    <div class="state-body">
+      <div class="city-section">
+        <div class="city-header" onclick="toggleCity(this)"><div class="city-name"><div class="city-dot" style="background:var(--sc)"></div>Columbia</div><div style="display:flex;align-items:center;gap:8px"><span class="city-count">3 partners</span><svg class="city-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+        <div class="city-body"><div class="org-list">
+          <div class="org-card"><div class="org-card-name">Lutheran Services Carolinas — South Carolina</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span class="org-detail-text">SCfostercare@lscarolinas.net</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://lscarolinas.net" target="_blank">lscarolinas.net</a></div></div>
+          <div class="org-card"><div class="org-card-name">SAFY of South Carolina</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://safy.org/south-carolina" target="_blank">safy.org/south-carolina</a></div></div>
+          <div class="org-card"><div class="org-card-name">The Bair Foundation — Columbia</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://bair.org/locations/columbia" target="_blank">bair.org</a></div></div>
+        </div></div>
+      </div>
+      <div class="city-section">
+        <div class="city-header" onclick="toggleCity(this)"><div class="city-name"><div class="city-dot" style="background:var(--sc)"></div>Charleston</div><div style="display:flex;align-items:center;gap:8px"><span class="city-count">3 partners</span><svg class="city-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+        <div class="city-body"><div class="org-list">
+          <div class="org-card"><div class="org-card-name">SAFY of South Carolina — Charleston</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">2154 N Center St, Suite B 203, North Charleston, SC 29406</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://safy.org/south-carolina" target="_blank">safy.org</a></div></div>
+          <div class="org-card"><div class="org-card-name">Connie Maxwell Children's Ministries</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">800-868-2624 · preed@conniemaxwell.com</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://conniemaxwell.com" target="_blank">conniemaxwell.com</a></div></div>
+          <div class="org-card"><div class="org-card-name">SC Foster Parent Association (Heartfelt Calling)</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://scfpa.com" target="_blank">scfpa.com</a></div></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIRGINIA -->
+  <div class="state-section" data-state="va">
+    <div class="state-header" onclick="toggleState(this)">
+      <div class="state-swatch" style="background:var(--va)">VA</div>
+      <div class="state-info">
+        <div class="state-name">Virginia</div>
+        <div class="state-meta">7 chapters · 4 service areas · 11 partners</div>
+      </div>
+      <div class="state-chevron"><svg class="chevron-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+    </div>
+    <div class="state-body">
+      <div class="city-section">
+        <div class="city-header" onclick="toggleCity(this)"><div class="city-name"><div class="city-dot" style="background:var(--va)"></div>Richmond</div><div style="display:flex;align-items:center;gap:8px"><span class="city-count">3 partners</span><svg class="city-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+        <div class="city-body"><div class="org-list">
+          <div class="org-card"><div class="org-card-name">Shineforth / UMFS — Richmond</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://umfs.org/locations/richmond" target="_blank">umfs.org</a></div></div>
+          <div class="org-card"><div class="org-card-name">Commonwealth Catholic Charities — Richmond</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://cccofva.org/fostercare" target="_blank">cccofva.org</a></div></div>
+          <div class="org-card"><div class="org-card-name">KidsPeace Foster Care — Richmond</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">7631 Hull Street Rd., 2nd floor, Chesterfield, VA 23235</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">804-745-2153</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://fostercare.com/richmond" target="_blank">fostercare.com</a></div></div>
+        </div></div>
+      </div>
+      <div class="city-section">
+        <div class="city-header" onclick="toggleCity(this)"><div class="city-name"><div class="city-dot" style="background:var(--va)"></div>Norfolk / Portsmouth / Newport News</div><div style="display:flex;align-items:center;gap:8px"><span class="city-count">3 partners</span><svg class="city-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+        <div class="city-body"><div class="org-list">
+          <div class="org-card"><div class="org-card-name">Tidewater Friends of Foster Care</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">999 Waterside Dr., Suite 103, Norfolk, VA 23510</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">757-227-4187 · Info@friendsoffostercare.org</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://friendsoffostercare.org" target="_blank">friendsoffostercare.org</a></div></div>
+          <div class="org-card"><div class="org-card-name">Barry Robinson Center — Norfolk</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">443 Kempsville Road, Norfolk, VA 23502</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">757-455-6100 / 1-800-221-1995</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://barryrobinson.org" target="_blank">barryrobinson.org</a></div></div>
+          <div class="org-card"><div class="org-card-name">Catholic Charities of Eastern Virginia — Newport News</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">12829 Jefferson Avenue, Suite 101, Newport News, VA 23608</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">757-875-0060</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://cceva.org" target="_blank">cceva.org</a></div></div>
+        </div></div>
+      </div>
+      <div class="city-section">
+        <div class="city-header" onclick="toggleCity(this)"><div class="city-name"><div class="city-dot" style="background:var(--va)"></div>Roanoke</div><div style="display:flex;align-items:center;gap:8px"><span class="city-count">3 partners</span><svg class="city-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+        <div class="city-body"><div class="org-list">
+          <div class="org-card"><div class="org-card-name">Braley &amp; Thompson / DePaul Community Resources</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">2965 Colonnade Drive, Suite 130, Roanoke, VA 24018</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">540-989-7175 / 877-886-4975</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://braleyandthompson.com" target="_blank">braleyandthompson.com</a></div></div>
+          <div class="org-card"><div class="org-card-name">DePaul Community Resources — Roanoke</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">5650 Hollins Rd., Roanoke, VA 24019</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">540-265-8923 · info@depaulcr.org</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://depaulcr.org" target="_blank">depaulcr.org</a></div></div>
+          <div class="org-card"><div class="org-card-name">First Home Care — Roanoke</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">6711 Peters Creek Road, Suite 200, Roanoke, VA 24019</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">540-265-2380</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://firsthomecare.com" target="_blank">firsthomecare.com</a></div></div>
+        </div></div>
+      </div>
+      <div class="city-section">
+        <div class="city-header" onclick="toggleCity(this)"><div class="city-name"><div class="city-dot" style="background:var(--va)"></div>Lynchburg</div><div style="display:flex;align-items:center;gap:8px"><span class="city-count">2 partners</span><svg class="city-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+        <div class="city-body"><div class="org-list">
+          <div class="org-card"><div class="org-card-name">Family Life Services — Lynchburg</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">PO Box 4199, Lynchburg, VA 24502</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">434-845-5334 / 888-760-5433 · admin@familylifeservices.org</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://familylifeservices.org" target="_blank">familylifeservices.org</a></div></div>
+          <div class="org-card"><div class="org-card-name">DePaul Community Resources — Lynchburg (Forest)</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">4859 Waterlick Rd., Forest, VA 24551</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">434-455-3727 · info@depaulcr.org</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://depaulcr.org" target="_blank">depaulcr.org</a></div></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEST VIRGINIA -->
+  <div class="state-section" data-state="wv">
+    <div class="state-header" onclick="toggleState(this)">
+      <div class="state-swatch" style="background:var(--wv)">WV</div>
+      <div class="state-info">
+        <div class="state-name">West Virginia</div>
+        <div class="state-meta">1 chapter · Bluefield area · 5 partners</div>
+      </div>
+      <div class="state-chevron"><svg class="chevron-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+    </div>
+    <div class="state-body">
+      <div class="city-section">
+        <div class="city-header" onclick="toggleCity(this)"><div class="city-name"><div class="city-dot" style="background:var(--wv)"></div>Charleston (statewide services)</div><div style="display:flex;align-items:center;gap:8px"><span class="city-count">3 partners</span><svg class="city-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+        <div class="city-body"><div class="org-list">
+          <div class="org-card"><div class="org-card-name">KVC West Virginia — Charleston</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">300 Kenton St, Suite 200, Charleston, WV 25311</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">304-347-9818 / 800-835-5277</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://westvirginia.kvc.org" target="_blank">westvirginia.kvc.org</a></div></div>
+          <div class="org-card"><div class="org-card-name">Children's Home Society of WV — Charleston</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">1422 Kanawha Blvd., E., Charleston, WV 25330</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">304-345-3894 · info@childhswv.org</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://childhswv.org" target="_blank">childhswv.org</a></div></div>
+          <div class="org-card"><div class="org-card-name">Mission West Virginia</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://missionwv.org" target="_blank">missionwv.org</a></div></div>
+        </div></div>
+      </div>
+      <div class="city-section">
+        <div class="city-header" onclick="toggleCity(this)"><div class="city-name"><div class="city-dot" style="background:var(--wv)"></div>Bluefield area (Princeton, WV)</div><div style="display:flex;align-items:center;gap:8px"><span class="city-count">2 partners</span><svg class="city-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div></div>
+        <div class="city-body"><div class="org-list">
+          <div class="org-card"><div class="org-card-name">Children's Home Society of WV — Princeton</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">205 Center St, Princeton, WV 24740</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">304-431-2424 · info@childhswv.org</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://childhswv.org" target="_blank">childhswv.org</a></div></div>
+          <div class="org-card"><div class="org-card-name">Pressley Ridge — Crab Orchard, WV</div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="org-detail-text">1265 Robert C. Byrd Dr., Crab Orchard, WV 25827<br>Nearest WV office to Bluefield</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.53 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17.41"/></svg><span class="org-detail-text">304-252-1106</span></div><div class="org-detail-row"><svg class="org-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><a class="org-link" href="https://pressleyridge.org/wvfoster" target="_blank">pressleyridge.org</a></div></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-results" id="no-results">No partners found matching your search.</div>
+
+</div>
+
+<div class="footer">
+  Jack and Jill of America · Mid-Atlantic Region<br>
+  <a href="goodsoil.html">View interactive map ↗</a> · <a href="https://jackandjillinc.org" target="_blank">jackandjillinc.org</a>
+</div>
+
+<script>
+function toggleState(header) {
+  const body = header.nextElementSibling;
+  const isOpen = header.classList.contains('open');
+  header.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+
+function toggleCity(header) {
+  const body = header.nextElementSibling;
+  const isOpen = header.classList.contains('open');
+  header.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+
+function filterOrgs(query) {
+  const q = query.toLowerCase().trim();
+  const sections = document.querySelectorAll('.state-section');
+  let anyVisible = false;
+
+  sections.forEach(section => {
+    const cities = section.querySelectorAll('.city-section');
+    let stateVisible = false;
+
+    cities.forEach(city => {
+      const text = city.textContent.toLowerCase();
+      const match = !q || text.includes(q);
+      city.style.display = match ? '' : 'none';
+      if (match) stateVisible = true;
+    });
+
+    section.style.display = stateVisible ? '' : 'none';
+    if (stateVisible) anyVisible = true;
+
+    if (q && stateVisible) {
+      section.querySelector('.state-header').classList.add('open');
+      section.querySelector('.state-body').classList.add('open');
+    }
+  });
+
+  document.getElementById('no-results').style.display = anyVisible ? 'none' : 'block';
+}
+</script>
+</body>
+</html>
