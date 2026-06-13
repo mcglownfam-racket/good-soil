@@ -797,7 +797,7 @@
 
       <!-- QR Code -->
       <div class="qr-panel">
-        <div id="qr-container" style="width:120px;height:120px;border-radius:6px;overflow:hidden;background:#fff"></div>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fmcglownfam-racket.github.io%2Fgood-soil%2Fgoodsoil.html&bgcolor=ffffff&color=1a1510&margin=4" width="120" height="120" style="border-radius:6px;display:block;" alt="QR code">
         <div class="qr-text">
           <div class="headline">Scan to share</div>
           <div class="sub">Open this directory<br>on your phone</div>
@@ -973,24 +973,7 @@ function moveTip(e) {
   tooltip.style.top = y + 'px';
 }
 
-// Real QR code using qrcode.js
-(function loadQR() {
-  const script = document.createElement('script');
-  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
-  script.onload = function() {
-    const container = document.getElementById('qr-container');
-    if (!container) return;
-    new QRCode(container, {
-      text: 'https://mcglownfam-racket.github.io/good-soil/goodsoil.html',
-      width: 120,
-      height: 120,
-      colorDark: '#1a1510',
-      colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.M
-    });
-  };
-  document.head.appendChild(script);
-})();
+
 </script>
 </body>
 </html>
