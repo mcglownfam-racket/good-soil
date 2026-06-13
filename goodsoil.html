@@ -797,7 +797,7 @@
 
       <!-- QR Code -->
       <div class="qr-panel">
-        <canvas id="qr-canvas" width="64" height="64"></canvas>
+        <div id="qr-container" style="width:64px;height:64px;border-radius:6px;overflow:hidden;background:#fff"></div>
         <div class="qr-text">
           <div class="headline">Scan to share</div>
           <div class="sub">Open this directory<br>on your phone</div>
@@ -973,36 +973,23 @@ function moveTip(e) {
   tooltip.style.top = y + 'px';
 }
 
-// QR code (simple pattern generator)
-(function() {
-  const canvas = document.getElementById('qr-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const size = 64, mod = 21, cell = Math.floor(size / mod);
-  const url = window.location.href;
-  const seed = url.split('').reduce((a,c,i) => a + c.charCodeAt(0) * (i+1), 0);
-  const rng = i => ((seed * 9301 + i * 49297 + 12345) % 233280) / 233280;
-  ctx.fillStyle = '#fff';
-  ctx.fillRect(0,0,size,size);
-  ctx.fillStyle = '#1a1510';
-  for (let r=0;r<mod;r++) {
-    for (let c=0;c<mod;c++) {
-      const isTopLeft = r<7&&c<7, isTopRight = r<7&&c>mod-8, isBotLeft = r>mod-8&&c<7;
-      let fill = false;
-      if (isTopLeft||isTopRight||isBotLeft) {
-        const inBorder = (r==0||r==6||c==0||c==6)&&isTopLeft||
-                         (r==0||r==6||c==mod-1||c==mod-7)&&isTopRight||
-                         (r==mod-1||r==mod-7||c==0||c==6)&&isBotLeft;
-        const inCore = (r>=2&&r<=4&&c>=2&&c<=4)||
-                       (r>=2&&r<=4&&c>=mod-5&&c<=mod-3)||
-                       (r>=mod-5&&r<=mod-3&&c>=2&&c<=4);
-        fill = inBorder||inCore;
-      } else {
-        fill = rng(r*mod+c) > 0.48;
-      }
-      if (fill) ctx.fillRect(c*cell, r*cell, cell, cell);
-    }
-  }
+// Real QR code using qrcode.js
+(function loadQR() {
+  const script = document.createElement('script');
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+  script.onload = function() {
+    const container = document.getElementById('qr-container');
+    if (!container) return;
+    new QRCode(container, {
+      text: 'https://mcglownfam-racket.github.io/good-soil/goodsoil.html',
+      width: 64,
+      height: 64,
+      colorDark: '#1a1510',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  };
+  document.head.appendChild(script);
 })();
 </script>
 </body>
