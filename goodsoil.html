@@ -11,23 +11,23 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --gold: #C9A84C;
-    --gold-light: #E8D5A0;
-    --gold-pale: #F7F0DC;
-    --ink: #1A1510;
-    --ink-mid: #3D3425;
-    --ink-light: #6B5F4A;
-    --cream: #FAF7F0;
-    --cream-dark: #F0EAD8;
+    --gold: #F59BBB;
+    --gold-light: #F9C4D6;
+    --gold-pale: #FDE8F0;
+    --ink: #00204A;
+    --ink-mid: #003270;
+    --ink-light: #1A5296;
+    --cream: #F0F6FF;
+    --cream-dark: #D6E6F7;
     --nc: #2E7D5E;
     --nc-light: #5BAF8A;
     --nc-pale: #D4EDE4;
-    --sc: #1E5FA0;
+    --sc: #005DAA;
     --sc-light: #4A90CC;
     --sc-pale: #CCE0F2;
-    --va: #6B3FA0;
-    --va-light: #9A6FCC;
-    --va-pale: #E2D4F2;
+    --va: #D22385;
+    --va-light: #F059AA;
+    --va-pale: #F9D0E8;
     --wv: #C04A20;
     --wv-light: #E07550;
     --wv-pale: #F5D8CC;
@@ -74,7 +74,7 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--gold) 0%, #A07830 100%);
+    background: linear-gradient(135deg, #F59BBB 0%, #D22385 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -317,7 +317,7 @@
     grid-area: map;
     position: relative;
     overflow: hidden;
-    background: radial-gradient(ellipse at 60% 50%, #1e1810 0%, #0d0b08 100%);
+    background: radial-gradient(ellipse at 60% 50%, #003a7a 0%, #00204a 100%);
   }
 
   .map-canvas {
@@ -332,8 +332,8 @@
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      linear-gradient(rgba(245,155,187,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,155,187,0.06) 1px, transparent 1px);
     background-size: 60px 60px;
     pointer-events: none;
   }
@@ -595,13 +595,13 @@
 
       <!-- Compass rose decoration -->
       <svg class="compass" width="80" height="80" viewBox="0 0 80 80" fill="none">
-        <circle cx="40" cy="40" r="38" stroke="rgba(201,168,76,0.8)" stroke-width="0.8"/>
-        <circle cx="40" cy="40" r="30" stroke="rgba(201,168,76,0.5)" stroke-width="0.5"/>
-        <polygon points="40,4 44,36 40,40 36,36" fill="rgba(201,168,76,0.9)"/>
-        <polygon points="40,76 44,44 40,40 36,44" fill="rgba(201,168,76,0.4)"/>
-        <polygon points="4,40 36,36 40,40 36,44" fill="rgba(201,168,76,0.4)"/>
-        <polygon points="76,40 44,36 40,40 44,44" fill="rgba(201,168,76,0.4)"/>
-        <text x="40" y="18" text-anchor="middle" font-size="9" fill="rgba(201,168,76,0.9)" font-family="DM Sans,sans-serif" font-weight="500">N</text>
+        <circle cx="40" cy="40" r="38" stroke="rgba(245,155,187,0.8)" stroke-width="0.8"/>
+        <circle cx="40" cy="40" r="30" stroke="rgba(245,155,187,0.5)" stroke-width="0.5"/>
+        <polygon points="40,4 44,36 40,40 36,36" fill="rgba(245,155,187,0.9)"/>
+        <polygon points="40,76 44,44 40,40 36,44" fill="rgba(245,155,187,0.4)"/>
+        <polygon points="4,40 36,36 40,40 36,44" fill="rgba(245,155,187,0.4)"/>
+        <polygon points="76,40 44,36 40,40 44,44" fill="rgba(245,155,187,0.4)"/>
+        <text x="40" y="18" text-anchor="middle" font-size="9" fill="rgba(245,155,187,0.9)" font-family="DM Sans,sans-serif" font-weight="500">N</text>
       </svg>
 
       <svg id="map-svg" viewBox="0 0 900 580" xmlns="http://www.w3.org/2000/svg">
@@ -628,11 +628,11 @@
           </linearGradient>
           <linearGradient id="sc-grad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#2E7ACC"/>
-            <stop offset="100%" stop-color="#144A80"/>
+            <stop offset="100%" stop-color="#004A8F"/>
           </linearGradient>
           <linearGradient id="va-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#8A5FC0"/>
-            <stop offset="100%" stop-color="#4E2888"/>
+            <stop offset="0%" stop-color="#E84FA0"/>
+            <stop offset="100%" stop-color="#A01868"/>
           </linearGradient>
           <linearGradient id="wv-grad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#D6603A"/>
@@ -661,15 +661,15 @@
           <path class="glow" d="M260,50 L620,38 L680,65 L700,95 L695,125 L670,148 L635,162 L595,170
                                  L555,175 L510,178 L470,175 L430,172 L390,168 L350,165 L310,163
                                  L285,160 L275,140 L290,110 L285,80 L250,58 Z"
-                fill="#6B3FA0" opacity="0.25" filter="url(#glow-va)"/>
+                fill="#D22385" opacity="0.25" filter="url(#glow-va)"/>
           <path class="fill" d="M260,50 L620,38 L680,65 L700,95 L695,125 L670,148 L635,162 L595,170
                                  L555,175 L510,178 L470,175 L430,172 L390,168 L350,165 L310,163
                                  L285,160 L275,140 L290,110 L285,80 L250,58 Z"
                 fill="url(#va-grad)"/>
           <text x="480" y="110" text-anchor="middle" font-family="Cormorant Garamond,serif"
-                font-size="22" font-weight="600" fill="rgba(225,210,255,0.9)" pointer-events="none">Virginia</text>
+                font-size="22" font-weight="600" fill="rgba(255,210,235,0.9)" pointer-events="none">Virginia</text>
           <text x="480" y="130" text-anchor="middle" font-family="DM Sans,sans-serif"
-                font-size="11" fill="rgba(200,180,240,0.65)" pointer-events="none">7 chapters · click to explore</text>
+                font-size="11" fill="rgba(249,196,214,0.65)" pointer-events="none">7 chapters · click to explore</text>
         </g>
 
         <!-- North Carolina -->
@@ -736,19 +736,19 @@
 
           <!-- VA cities -->
           <!-- Richmond -->
-          <circle cx="540" cy="148" r="4" fill="#C8AAEE" opacity="0.9"/>
-          <circle class="city-pulse" cx="540" cy="148" r="5" fill="none" stroke="#C8AAEE" stroke-width="1.5" opacity="0.5" style="animation-delay:0.3s"/>
-          <text x="548" y="145" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(210,185,255,0.8)">Richmond</text>
+          <circle cx="540" cy="148" r="4" fill="#F9C4D6" opacity="0.9"/>
+          <circle class="city-pulse" cx="540" cy="148" r="5" fill="none" stroke="#F9C4D6" stroke-width="1.5" opacity="0.5" style="animation-delay:0.3s"/>
+          <text x="548" y="145" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(249,196,214,0.8)">Richmond</text>
           <!-- Norfolk -->
-          <circle cx="635" cy="153" r="4" fill="#C8AAEE" opacity="0.9"/>
-          <circle class="city-pulse" cx="635" cy="153" r="5" fill="none" stroke="#C8AAEE" stroke-width="1.5" opacity="0.5" style="animation-delay:0.7s"/>
-          <text x="643" y="150" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(210,185,255,0.8)">Norfolk</text>
+          <circle cx="635" cy="153" r="4" fill="#F9C4D6" opacity="0.9"/>
+          <circle class="city-pulse" cx="635" cy="153" r="5" fill="none" stroke="#F9C4D6" stroke-width="1.5" opacity="0.5" style="animation-delay:0.7s"/>
+          <text x="643" y="150" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(249,196,214,0.8)">Norfolk</text>
           <!-- Roanoke -->
-          <circle cx="415" cy="148" r="3.5" fill="#C8AAEE" opacity="0.7"/>
-          <text x="423" y="145" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(210,185,255,0.65)">Roanoke</text>
+          <circle cx="415" cy="148" r="3.5" fill="#F9C4D6" opacity="0.7"/>
+          <text x="423" y="145" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(249,196,214,0.65)">Roanoke</text>
           <!-- Lynchburg -->
-          <circle cx="470" cy="152" r="3.5" fill="#C8AAEE" opacity="0.7"/>
-          <text x="478" y="149" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(210,185,255,0.65)">Lynchburg</text>
+          <circle cx="470" cy="152" r="3.5" fill="#F9C4D6" opacity="0.7"/>
+          <text x="478" y="149" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(249,196,214,0.65)">Lynchburg</text>
 
           <!-- SC cities -->
           <!-- Columbia -->
